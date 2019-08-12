@@ -5,7 +5,7 @@ A simple program to solve [Sudoku](https://en.wikipedia.org/wiki/Sudoku) puzzles
 ## Compilation
 
 ```
-g++ -O3 -o sudoku main.cpp Sudoku.cpp
+g++ -O3 -Wall -o sudoku main.cpp Sudoku.cpp
 ```
 
 ## Usage

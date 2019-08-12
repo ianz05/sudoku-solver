@@ -9,13 +9,13 @@ Sudoku::Sudoku(std::istream &is)
         board.push_back(std::vector<int>(start, eof));
     }
 
-    const auto size = static_cast<int>(board.size());
     for (const auto &row : board) {
-        if (row.size() != size) {
+        if (row.size() != board.size()) {
             throw std::runtime_error("Board must be square.");
         }
     }
 
+    const auto size = static_cast<int>(board.size());
     if (size != 4 && size != 9 && size != 16) {
         throw std::runtime_error("Board must have size 4, 9, or 16.");
     }
@@ -43,7 +43,7 @@ bool Sudoku::solve()
     int row = row_col.first;
     int col = row_col.second;
 
-    for (int num = 1; num <= board.size(); ++num) {
+    for (std::size_t num = 1; num <= board.size(); ++num) {
         if (is_safe(row, col, num)) {
             board[row][col] = num;
             blanks.pop_back();
@@ -59,8 +59,6 @@ bool Sudoku::solve()
 
 bool Sudoku::in_row(int row, int num) const
 {
-    if (row < 0 || row >= board.size())
-        throw std::invalid_argument("Row must be in [0, size)");
     return std::find(board[row].cbegin(), board[row].cend(), num) != board[row].cend();
 }
 
